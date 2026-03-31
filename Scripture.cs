@@ -21,10 +21,10 @@ public class Scripture
     {
         if (!(IsCompletelyHidden()))
         {
-            int randint = _random.Next(0, _words.Count+1);
+            int randint = _random.Next(0, _words.Count);
             while (_words[randint].IsHidden())
             {
-                randint = _random.Next(0, _words.Count + 1);
+                randint = _random.Next(0, _words.Count);
             }
     
             _words[randint].Hide();
@@ -54,6 +54,35 @@ public class Scripture
         }
 
         return true;
+    }
+
+    public float Mastery()
+    {
+        int mastery = 0;
+        foreach (Word word in _words)
+        {
+            if (!(word.IsHidden()))
+            {
+                mastery += 1;
+                
+            }
+        }
+        int length = _words.Count;
+        float percentage = (float)mastery / length;
+        if ((float)mastery/length <= 0.5)
+        {
+            Console.WriteLine("Matery : 🟥🟥🟥");
+        }
+        else if ((float)mastery / length < 1)
+        {
+            Console.WriteLine("Mastery: 🟨🟨🟨");
+        }
+        else
+        {
+            Console.WriteLine("Mastery: 🟩🟩🟩");
+        }
+
+        return (float)percentage * 100;
     }
     
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Implemented a mastery method in Scripture class to alert the user of the mastery leve
+using System;
 using ScriptureMemorizer;
 using System.Collections.Generic;
 
@@ -16,6 +17,7 @@ class Program
         while (!(userInput == "quit"))
         {
             Console.Clear();
+            Console.WriteLine(scripture.Mastery());
             if (scripture.IsCompletelyHidden())
             {
                 break;
