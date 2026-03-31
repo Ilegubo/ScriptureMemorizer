@@ -7,22 +7,31 @@ public class Scripture
 
     public Scripture(Reference reference, string text)
     {
-        
+        string[] words = text.Split(" ");
+        foreach (string word in words)
+        {
+            Word strWord = new Word(word);
+            _words.Add(strWord);
+        }
     }
 
-    public void HideRandomWords(int numberToHide)
+    public void HideRandomWords(/*int numberToHide*/)
     {
-        Random random = new Random();
-        _words.RemoveAt(random.Next(0,_words.Count));
-        _words.RemoveAt(random.Next(0, _words.Count));
+        int randint = GenerateRandom();
+        while (_words[randint].IsHidden())
+        {
+            randint = GenerateRandom();
+        }
+
+        _words[randint].Hide();
     }
 
     public string GetDisplayText()
     {
-        string words = "";
+        string words = _reference.GetDisplayText();
         foreach (Word word in _words)
         {
-            words += word.GetDisplayText();
+            words += " " + word.GetDisplayText();
         }
 
         return words;
@@ -39,5 +48,12 @@ public class Scripture
         }
 
         return true;
+    }
+
+    public int GenerateRandom()
+    {
+        Random random = new Random();
+        int randint = random.Next(0, _words.Count);
+        return randint;
     }
 }

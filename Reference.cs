@@ -24,6 +24,10 @@ public class Reference
 
     public string GetDisplayText()
     {
+        if (string.IsNullOrEmpty(_endVerse.ToString()))
+        { 
+            return $"{_book} {_chapter}:{_verse}";
+        }
         return $"{_book} {_chapter}:{_verse}-{_endVerse}";
     }
 }

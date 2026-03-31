@@ -3,12 +3,17 @@ namespace ScriptureMemorizer;
 public class Word
 {
     private string _text;
-    private bool _isHidden;
+    private bool _isHidden = false;
+
+    public Word(string text)
+    {
+        _text = text;
+    }
 
     public void Hide()
     {
         _isHidden = true;
-        Console.Write((_text.Length)*"_");
+        Console.Write(string.Join("*", new string[_text.Length]));
     }
 
     public void show()
@@ -19,17 +24,17 @@ public class Word
 
     public bool IsHidden()
     {
-        return true;
+        return _isHidden;
     }
 
     public string GetDisplayText()
     {
-        return _text;
-    }
+        if (_isHidden)
+        {
+            return $"{string.Join("_", new string[_text.Length])}";
+        }
 
-    public void SetText(string text)
-    {
-        _text = text;
+        return _text;
     }
     
 }
