@@ -31,7 +31,7 @@ public class Word
     {
         if (_isHidden)
         {
-            return $"{string.Join("_", new string[_text.Length])}";
+            return new string('_', _text.Length);
         }
 
         return _text;

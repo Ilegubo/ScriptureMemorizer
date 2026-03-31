@@ -4,9 +4,11 @@ public class Scripture
 {
     private Reference _reference;
     private List<Word> _words = new List<Word>();
+    private Random _random = new Random();
 
     public Scripture(Reference reference, string text)
     {
+        _reference = reference;
         string[] words = text.Split(" ");
         foreach (string word in words)
         {
@@ -15,15 +17,19 @@ public class Scripture
         }
     }
 
-    public void HideRandomWords(/*int numberToHide*/)
+    public void HideRandomWords()
     {
-        int randint = GenerateRandom();
-        while (_words[randint].IsHidden())
+        if (!(IsCompletelyHidden()))
         {
-            randint = GenerateRandom();
+            int randint = _random.Next(0, _words.Count+1);
+            while (_words[randint].IsHidden())
+            {
+                randint = _random.Next(0, _words.Count + 1);
+            }
+    
+            _words[randint].Hide();
         }
 
-        _words[randint].Hide();
     }
 
     public string GetDisplayText()
@@ -49,11 +55,5 @@ public class Scripture
 
         return true;
     }
-
-    public int GenerateRandom()
-    {
-        Random random = new Random();
-        int randint = random.Next(0, _words.Count);
-        return randint;
-    }
+    
 }

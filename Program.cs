@@ -16,8 +16,13 @@ class Program
         while (!(userInput == "quit"))
         {
             Console.Clear();
-            scripture.GetDisplayText();
+            if (scripture.IsCompletelyHidden())
+            {
+                break;
+            }
+            Console.WriteLine(scripture.GetDisplayText());
             Console.WriteLine("\nPress Enter to continue, type quit to exit");
+            userInput = Console.ReadLine();
             scripture.HideRandomWords();
         }
         Console.WriteLine("Exiting...");
